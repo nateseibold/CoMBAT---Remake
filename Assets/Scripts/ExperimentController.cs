@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class ExperimentController : MonoBehaviour
 {
+    //Cameras
     public Camera experimenterCamera;
+    public Camera darknessTrialCamera;
+    public Camera inBetweenCamera;
 
     //Can be used to stop the output file from recording
     public bool recording;
