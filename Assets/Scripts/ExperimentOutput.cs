@@ -20,7 +20,7 @@ public class ExperimentOutput : MonoBehaviour
         application_Path = application_Path + "/"+"headData.txt";
         m_Path = application_Path;
 
-        string header = "Time,Subject ID,Trial Number,Trial Type,Actual Travel Time,Perceived Travel Time,Actual Start Point,Participant Start Point,Actual End Point,Participant End Point,Distance betweeen Actual and Participant Start,Distance between Actual and Participant End";
+        string header = "Time,Subject ID";
         StreamWriter writer8 = new StreamWriter(m_Path, true);
         writer8.WriteLine(header);
         writer8.Close();
@@ -31,7 +31,18 @@ public class ExperimentOutput : MonoBehaviour
     {
         if(GetComponent<ExperimentController>().recording)
         {
+            //Data
+            System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+            double cur_time = (double)(System.DateTime.UtcNow - epochStart).TotalMilliseconds;
+            cur_time = cur_time * 1000;
+            
+            string id = GetComponent<ExperimentController>().participantID;
 
+            dataTracked = cur_time.ToString("n0").Replace("," , "") + "," + id;
+
+            StreamWriter writer8 = new StreamWriter(m_Path, true);
+            writer8.WriteLine(dataTracked);
+            writer8.Close();
         }
     }
 }

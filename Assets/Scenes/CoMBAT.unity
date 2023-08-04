@@ -1280,7 +1280,14 @@ MonoBehaviour:
   experimenterCamera: {fileID: 1523310457}
   darknessTrialCamera: {fileID: 2003280559}
   inBetweenCamera: {fileID: 589138648}
+  experimenterCanvas: {fileID: 239701378}
+  darknessTrialCanvas: {fileID: 1723048127}
+  inBetweenCanvas: {fileID: 1587544134}
+  trialLengthInput: {fileID: 819826064}
+  partIDInput: {fileID: 1771022736}
   recording: 0
+  participantID: 
+  numTrials: 0
 --- !u!114 &496397705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1664,7 +1671,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 496397704}
+        m_TargetAssemblyTypeName: ExperimentController, Assembly-CSharp
+        m_MethodName: setNumTrials
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -3624,7 +3643,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 496397704}
+        m_TargetAssemblyTypeName: ExperimentController, Assembly-CSharp
+        m_MethodName: setID
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -4015,7 +4046,7 @@ Transform:
   m_GameObject: {fileID: 2003280558}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 342.4974, y: -6.0290613, z: -22.865175}
+  m_LocalPosition: {x: 342.4974, y: -6.0290613, z: -625.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
