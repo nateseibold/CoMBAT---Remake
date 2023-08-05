@@ -40,9 +40,9 @@ public class ExperimentOutput : MonoBehaviour
 
             dataTracked = cur_time.ToString("n0").Replace("," , "") + "," + id;
 
-            StreamWriter writer8 = new StreamWriter(m_Path, true);
-            writer8.WriteLine(dataTracked);
-            writer8.Close();
+            //StreamWriter writer8 = new StreamWriter(m_Path, true);
+            //writer8.WriteLine(dataTracked);
+            //writer8.Close();
         }
     }
 }
