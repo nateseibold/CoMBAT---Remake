@@ -34,8 +34,8 @@ public class ExperimentController : MonoBehaviour
 
         darknessTrialCamera.enabled = false;
         inBetweenCamera.enabled = false;
-
-
+        darknessTrialCanvas.SetActive(false);
+        inBetweenCanvas.SetActive(false);
     }
 
     // Update is called once per frame
