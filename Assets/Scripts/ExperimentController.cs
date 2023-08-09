@@ -21,6 +21,7 @@ public class ExperimentController : MonoBehaviour
     public GameObject partIDInput;
     public TMP_Text trialText;
     public TMP_Text conditionText;
+    public TMP_Text inBetweenText;
     public Button startButton;
 
     //Can be used to stop the output file from recording
@@ -31,6 +32,7 @@ public class ExperimentController : MonoBehaviour
     public string participantID;
     public int numTrials;
     public int currentTrial = 0;
+    public int condition;
     private bool foam = false;
     private bool seekingInput = false;
 
@@ -51,7 +53,6 @@ public class ExperimentController : MonoBehaviour
     {
         if(seekingInput && Input.GetKeyDown("space"))
         {
-            currentTrial++;
             seekingInput = false;
 
             if(currentTrial % 6 == 1 || currentTrial % 6 == 4)
@@ -82,6 +83,7 @@ public class ExperimentController : MonoBehaviour
     {
         TMP_InputField inputField = partIDInput.GetComponent<TMP_InputField>();
         participantID = inputField.text;
+        inputField.interactable = false;
     }
 
     //Called on End Edit event of the trial number input field
@@ -96,6 +98,7 @@ public class ExperimentController : MonoBehaviour
         if(success)
         {
             numTrials = num;
+            inputField.interactable = false;
         }
         else
         {
@@ -110,7 +113,17 @@ public class ExperimentController : MonoBehaviour
         inBetweenCamera.enabled = true;
         inBetweenCanvas.SetActive(true);
         darknessTrialCanvas.SetActive(false);
-        seekingInput = true;
+
+        currentTrial++;
+        if(currentTrial > numTrials)
+        {
+            seekingInput = false;
+            inBetweenText.text = "Experiment Over";
+        }
+        else
+        {
+            seekingInput = true;
+        }
     }
 
     private IEnumerator startNormalTrial()
@@ -123,13 +136,19 @@ public class ExperimentController : MonoBehaviour
         trialText.text = "Trial Number: " + currentTrial;
 
         if(!foam)
+        {
             conditionText.text = "Condition Number: 1";
+            condition = 1;
+        }
         else
+        {
             conditionText.text = "Condition Number: 4";
+            condition = 4;
+        }
 
         recording = true;
 
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(20);
         recording = false;
         resetTrials();
     }
@@ -145,13 +164,19 @@ public class ExperimentController : MonoBehaviour
         trialText.text = "Trial Number: " + currentTrial;
 
         if(!foam)
+        {
             conditionText.text = "Condition Number: 2";
+            condition = 2;
+        }
         else
+        {
             conditionText.text = "Condition Number: 5";
-
+            condition = 5;
+        }
+            
         recording = true;
 
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(20);
         recording = false;
         resetTrials();
     }
@@ -169,16 +194,18 @@ public class ExperimentController : MonoBehaviour
         {
             conditionText.text = "Condition Number: 3";
             foam = true;
+            condition = 3;
         }
         else
         {
             conditionText.text = "Condition Number: 6";
             foam = false;
+            condition = 6;
         }
 
         recording = true;
 
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(20);
         recording = false;
         resetTrials();
     }
