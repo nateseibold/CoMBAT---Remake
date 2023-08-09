@@ -8,11 +8,3 @@ Time,Subject ID
 Time,Subject ID
 Time,Subject ID
 Time,Subject ID
-Time,Subject ID
-Time,Subject ID
-Time,Subject ID
-Time,Subject ID
-Time,Subject ID
-Time,Subject ID
-Time,Subject ID
-Time,Subject ID
