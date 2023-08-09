@@ -21,6 +21,7 @@ public class ExperimentController : MonoBehaviour
     public GameObject partIDInput;
     public TMP_Text trialText;
     public TMP_Text conditionText;
+    public Button startButton;
 
     //Can be used to stop the output file from recording
     [HideInInspector]
@@ -31,6 +32,7 @@ public class ExperimentController : MonoBehaviour
     public int numTrials;
     public int currentTrial = 0;
     private bool foam = false;
+    private bool seekingInput = false;
 
     // Start is called before the first frame update
     void Start()
@@ -47,13 +49,31 @@ public class ExperimentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(seekingInput && Input.GetKeyDown("space"))
+        {
+            currentTrial++;
+            seekingInput = false;
+
+            if(currentTrial % 6 == 1 || currentTrial % 6 == 4)
+            {
+                StartCoroutine(startNormalTrial());
+            }
+            else if(currentTrial % 6 == 2 || currentTrial % 6 == 5)
+            {
+                StartCoroutine(startDarkTrial());
+            }
+            else
+            {
+                StartCoroutine(startDistortTrial());
+            }
+        }
     }
 
     //Called once the start button is pressed
     public void startExperiment()
     {
         currentTrial = 1;
+        startButton.interactable = false;
         StartCoroutine(startNormalTrial());
     }
 
@@ -89,6 +109,8 @@ public class ExperimentController : MonoBehaviour
         darknessTrialCamera.enabled = false;
         inBetweenCamera.enabled = true;
         inBetweenCanvas.SetActive(true);
+        darknessTrialCanvas.SetActive(false);
+        seekingInput = true;
     }
 
     private IEnumerator startNormalTrial()
@@ -104,6 +126,55 @@ public class ExperimentController : MonoBehaviour
             conditionText.text = "Condition Number: 1";
         else
             conditionText.text = "Condition Number: 4";
+
+        recording = true;
+
+        yield return new WaitForSeconds(15);
+        recording = false;
+        resetTrials();
+    }
+
+    private IEnumerator startDarkTrial()
+    {
+        roomCamera.enabled = false;
+        darknessTrialCamera.enabled = true;
+        inBetweenCamera.enabled = false;
+        inBetweenCanvas.SetActive(false);
+        darknessTrialCanvas.SetActive(true);
+
+        trialText.text = "Trial Number: " + currentTrial;
+
+        if(!foam)
+            conditionText.text = "Condition Number: 2";
+        else
+            conditionText.text = "Condition Number: 5";
+
+        recording = true;
+
+        yield return new WaitForSeconds(15);
+        recording = false;
+        resetTrials();
+    }
+
+    private IEnumerator startDistortTrial()
+    {
+        roomCamera.enabled = true;
+        darknessTrialCamera.enabled = false;
+        inBetweenCamera.enabled = false;
+        inBetweenCanvas.SetActive(false);
+
+        trialText.text = "Trial Number: " + currentTrial;
+
+        if(!foam)
+        {
+            conditionText.text = "Condition Number: 3";
+            foam = true;
+        }
+        else
+        {
+            conditionText.text = "Condition Number: 6";
+            foam = false;
+        }
 
         recording = true;
 
