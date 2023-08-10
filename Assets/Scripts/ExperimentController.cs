@@ -28,6 +28,9 @@ public class ExperimentController : MonoBehaviour
     [HideInInspector]
     public bool recording;
 
+    //Room Variable
+    public GameObject room;
+
     //Experiment Variables
     public string participantID;
     public int numTrials;
@@ -214,11 +217,19 @@ public class ExperimentController : MonoBehaviour
 
         yield return new WaitForSeconds(trialLength);
         recording = false;
+        returnWorld();
         resetTrials();
     }
 
+    //Makes the room move with the camera
     private void distortWorld()
     {
+        room.transform.SetParent(roomCamera.transform);
+    }
 
+    //Returns to a static camera
+    private void returnWorld()
+    {
+        room.transform.SetParent(null);
     }
 }
