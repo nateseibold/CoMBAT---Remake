@@ -35,6 +35,7 @@ public class ExperimentController : MonoBehaviour
     public int condition;
     private bool foam = false;
     private bool seekingInput = false;
+    private int trialLength = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -106,6 +107,7 @@ public class ExperimentController : MonoBehaviour
         }
     }
 
+    //Called after the alloted time for each trial is up
     private void resetTrials()
     {
         roomCamera.enabled = false;
@@ -126,6 +128,7 @@ public class ExperimentController : MonoBehaviour
         }
     }
 
+    //Begins Conditions 1 and 4
     private IEnumerator startNormalTrial()
     {
         roomCamera.enabled = true;
@@ -148,11 +151,12 @@ public class ExperimentController : MonoBehaviour
 
         recording = true;
 
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(trialLength);
         recording = false;
         resetTrials();
     }
 
+    //Begins Conditions 2 and 5
     private IEnumerator startDarkTrial()
     {
         roomCamera.enabled = false;
@@ -176,17 +180,20 @@ public class ExperimentController : MonoBehaviour
             
         recording = true;
 
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(trialLength);
         recording = false;
         resetTrials();
     }
 
+    //Begins Conditions 3 and 6
     private IEnumerator startDistortTrial()
     {
         roomCamera.enabled = true;
         darknessTrialCamera.enabled = false;
         inBetweenCamera.enabled = false;
         inBetweenCanvas.SetActive(false);
+
+        distortWorld();
 
         trialText.text = "Trial Number: " + currentTrial;
 
@@ -205,8 +212,13 @@ public class ExperimentController : MonoBehaviour
 
         recording = true;
 
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(trialLength);
         recording = false;
         resetTrials();
+    }
+
+    private void distortWorld()
+    {
+
     }
 }
