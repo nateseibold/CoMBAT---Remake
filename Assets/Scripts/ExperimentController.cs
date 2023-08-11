@@ -10,18 +10,24 @@ public class ExperimentController : MonoBehaviour
     //Cameras
     public Camera experimenterCamera;
     public Camera darknessTrialCamera;
+    public Camera darknessTrialCamera2;
     public Camera inBetweenCamera;
+    public Camera inBetweenCamera2;
     public Camera roomCamera;
+    public Camera roomCamera2;
 
     //UI Variables
     public GameObject experimenterCanvas;
     public GameObject darknessTrialCanvas;
     public GameObject inBetweenCanvas;
+    public GameObject darknessTrialCanvas2;
+    public GameObject inBetweenCanvas2;
     public GameObject trialLengthInput;
     public GameObject partIDInput;
     public TMP_Text trialText;
     public TMP_Text conditionText;
     public TMP_Text inBetweenText;
+    public TMP_Text inBetweenText2;
     public Button startButton;
 
     //Can be used to stop the output file from recording
@@ -46,10 +52,15 @@ public class ExperimentController : MonoBehaviour
         recording = false;
 
         roomCamera.enabled = false;
+        roomCamera2.enabled = false;
         darknessTrialCamera.enabled = false;
+        darknessTrialCamera2.enabled = false;
         inBetweenCamera.enabled = true;
+        inBetweenCamera2.enabled = true;
         darknessTrialCanvas.SetActive(false);
         inBetweenCanvas.SetActive(true);
+        darknessTrialCanvas2.SetActive(false);
+        inBetweenCanvas2.SetActive(true);
     }
 
     // Update is called once per frame
@@ -87,7 +98,11 @@ public class ExperimentController : MonoBehaviour
     {
         TMP_InputField inputField = partIDInput.GetComponent<TMP_InputField>();
         participantID = inputField.text;
-        inputField.interactable = false;
+
+        if(participantID != "")
+        {
+            inputField.interactable = false;
+        }
     }
 
     //Called on End Edit event of the trial number input field
@@ -114,16 +129,22 @@ public class ExperimentController : MonoBehaviour
     private void resetTrials()
     {
         roomCamera.enabled = false;
+        roomCamera2.enabled = false;
         darknessTrialCamera.enabled = false;
+        darknessTrialCamera2.enabled = false;
         inBetweenCamera.enabled = true;
+        inBetweenCamera2.enabled = true;
         inBetweenCanvas.SetActive(true);
         darknessTrialCanvas.SetActive(false);
+        darknessTrialCanvas2.SetActive(false);
+        inBetweenCanvas2.SetActive(true);
 
         currentTrial++;
         if(currentTrial > numTrials)
         {
             seekingInput = false;
             inBetweenText.text = "Experiment Over";
+            inBetweenText2.text = "Experiment Over";
         }
         else
         {
@@ -135,9 +156,13 @@ public class ExperimentController : MonoBehaviour
     private IEnumerator startNormalTrial()
     {
         roomCamera.enabled = true;
+        roomCamera2.enabled = true;
         darknessTrialCamera.enabled = false;
+        darknessTrialCamera2.enabled = false;
         inBetweenCamera.enabled = false;
+        inBetweenCamera2.enabled = false;
         inBetweenCanvas.SetActive(false);
+        inBetweenCanvas2.SetActive(false);
 
         trialText.text = "Trial Number: " + currentTrial;
 
@@ -163,10 +188,15 @@ public class ExperimentController : MonoBehaviour
     private IEnumerator startDarkTrial()
     {
         roomCamera.enabled = false;
+        roomCamera2.enabled = false;
         darknessTrialCamera.enabled = true;
+        darknessTrialCamera2.enabled = true;
         inBetweenCamera.enabled = false;
+        inBetweenCamera2.enabled = false;
         inBetweenCanvas.SetActive(false);
+        inBetweenCanvas2.SetActive(false);
         darknessTrialCanvas.SetActive(true);
+        darknessTrialCanvas2.SetActive(true);
 
         trialText.text = "Trial Number: " + currentTrial;
 
@@ -192,9 +222,13 @@ public class ExperimentController : MonoBehaviour
     private IEnumerator startDistortTrial()
     {
         roomCamera.enabled = true;
+        roomCamera2.enabled = true;
         darknessTrialCamera.enabled = false;
+        darknessTrialCamera2.enabled = false;
         inBetweenCamera.enabled = false;
+        inBetweenCamera2.enabled = false;
         inBetweenCanvas.SetActive(false);
+        inBetweenCanvas2.SetActive(false);
 
         distortWorld();
 
