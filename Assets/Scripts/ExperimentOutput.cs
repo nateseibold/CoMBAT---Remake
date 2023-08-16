@@ -43,7 +43,7 @@ public class ExperimentOutput : MonoBehaviour
             float y = playerHead.transform.position.y;
             float z = playerHead.transform.position.z;
 
-            dataTracked = Time.time + "," + id + "," + trial + "," + condition + "," + x + "," + y + "," + z + "," + Time.time + "\n";
+            dataTracked = Time.time + "," + id + "," + trial + "," + condition + "," + x + "," + y + "," + z + "\n";
 
             StreamWriter writer8 = new StreamWriter(m_Path, true);
             writer8.WriteLine(dataTracked);
