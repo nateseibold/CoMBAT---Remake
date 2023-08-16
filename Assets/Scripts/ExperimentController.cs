@@ -29,6 +29,8 @@ public class ExperimentController : MonoBehaviour
     public TMP_Text conditionText;
     public TMP_Text inBetweenText;
     public TMP_Text inBetweenText2;
+    public TMP_Text roomText;
+    public TMP_Text roomText2;
     public Button startButton;
 
     //Can be used to stop the output file from recording
@@ -46,7 +48,7 @@ public class ExperimentController : MonoBehaviour
     private bool foam = false;
     private bool seekingInput = false;
     private int trialLength = 20;
-    private bool distort;
+    private bool distort = false;
 
     // Start is called before the first frame update
     void Start()
@@ -88,7 +90,7 @@ public class ExperimentController : MonoBehaviour
 
         if(distort)
         {
-            roomCamera2.transform.position = -InputTracking.GetLocalPosition(XRNode.CenterEye);
+            
         }
     }
 
@@ -184,6 +186,28 @@ public class ExperimentController : MonoBehaviour
             condition = 4;
         }
 
+        roomText.text = "Feel Free to Look Around";
+        roomText2.text = "Feel Free to Look Around";
+
+        yield return new WaitForSeconds(7);
+
+        roomText.text = "Please Look Forward. Trial starts in: 3";
+        roomText2.text = "Please Look Forward. Trial starts in: 3";
+
+        yield return new WaitForSeconds(1);
+
+        roomText.text = "Please Look Forward. Trial starts in: 2";
+        roomText2.text = "Please Look Forward. Trial starts in: 2";
+
+        yield return new WaitForSeconds(1);
+
+        roomText.text = "Please Look Forward. Trial starts in: 1";
+        roomText2.text = "Please Look Forward. Trial starts in: 1";
+
+        yield return new WaitForSeconds(1);
+
+        roomText.text = "";
+        roomText2.text = "";
         recording = true;
 
         yield return new WaitForSeconds(trialLength);
@@ -217,7 +241,9 @@ public class ExperimentController : MonoBehaviour
             conditionText.text = "Condition Number: 5";
             condition = 5;
         }
-            
+
+        yield return new WaitForSeconds(10);
+
         recording = true;
 
         yield return new WaitForSeconds(trialLength);
@@ -254,6 +280,28 @@ public class ExperimentController : MonoBehaviour
             condition = 6;
         }
 
+        roomText.text = "Feel Free to Look Around";
+        roomText2.text = "Feel Free to Look Around";
+
+        yield return new WaitForSeconds(7);
+
+        roomText.text = "Please Look Forward. Trial starts in: 3";
+        roomText2.text = "Please Look Forward. Trial starts in: 3";
+
+        yield return new WaitForSeconds(1);
+
+        roomText.text = "Please Look Forward. Trial starts in: 2";
+        roomText2.text = "Please Look Forward. Trial starts in: 2";
+
+        yield return new WaitForSeconds(1);
+
+        roomText.text = "Please Look Forward. Trial starts in: 1";
+        roomText2.text = "Please Look Forward. Trial starts in: 1";
+
+        yield return new WaitForSeconds(1);
+
+        roomText.text = "";
+        roomText2.text = "";
         recording = true;
 
         yield return new WaitForSeconds(trialLength);
