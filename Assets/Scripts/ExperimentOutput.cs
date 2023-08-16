@@ -20,7 +20,7 @@ public class ExperimentOutput : MonoBehaviour
         application_Path = application_Path + "/"+"headData.txt";
         m_Path = application_Path;
 
-        string header = "Time,Participant ID,Trial Number,Condition Number,Head Position x,Head Position y,Head Position z";
+        string header = "Time Since Start (in seconds),Participant ID,Trial Number,Condition Number,Head Position x,Head Position y,Head Position z";
         StreamWriter writer8 = new StreamWriter(m_Path, true);
         writer8.WriteLine(header);
         writer8.Close();
@@ -43,7 +43,7 @@ public class ExperimentOutput : MonoBehaviour
             float y = playerHead.transform.position.y;
             float z = playerHead.transform.position.z;
 
-            dataTracked = cur_time.ToString("n0").Replace("," , "") + "," + id + "," + trial + "," + condition + "," + x + "," + y + "," + z;
+            dataTracked = Time.time + "," + id + "," + trial + "," + condition + "," + x + "," + y + "," + z + "," + Time.time + "\n";
 
             StreamWriter writer8 = new StreamWriter(m_Path, true);
             writer8.WriteLine(dataTracked);
