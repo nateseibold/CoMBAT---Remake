@@ -229,6 +229,8 @@ public class ExperimentController : MonoBehaviour
         darknessTrialCanvas.SetActive(true);
         darknessTrialCanvas2.SetActive(true);
 
+        room.SetActive(false);
+
         trialText.text = "Trial Number: " + currentTrial;
 
         if(!foam)
@@ -248,6 +250,7 @@ public class ExperimentController : MonoBehaviour
 
         yield return new WaitForSeconds(trialLength);
         recording = false;
+        room.SetActive(true);
         resetTrials();
     }
 
