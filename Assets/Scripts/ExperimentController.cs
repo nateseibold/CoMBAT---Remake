@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class ExperimentController : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class ExperimentController : MonoBehaviour
     private bool foam = false;
     private bool seekingInput = false;
     private int trialLength = 20;
+    private bool distort;
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +84,11 @@ public class ExperimentController : MonoBehaviour
             {
                 StartCoroutine(startDistortTrial());
             }
+        }
+
+        if(distort)
+        {
+            roomCamera2.transform.position = -InputTracking.GetLocalPosition(XRNode.CenterEye);
         }
     }
 
@@ -258,12 +265,14 @@ public class ExperimentController : MonoBehaviour
     //Makes the room move with the camera
     private void distortWorld()
     {
-        room.transform.SetParent(roomCamera.transform);
+        //room.transform.SetParent(roomCamera.transform);
+        distort = true;
     }
 
     //Returns to a static camera
     private void returnWorld()
     {
-        room.transform.SetParent(null);
+        //room.transform.SetParent(null);
+        distort = false;
     }
 }
