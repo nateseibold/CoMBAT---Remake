@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.combatremake.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\u1275012\\Desktop\\CoMBAT---Remake\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\VR Lab Admin\\Documents\\GitHub\\CoMBAT---Remake\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "CoMBAT - Remake [Testing]"

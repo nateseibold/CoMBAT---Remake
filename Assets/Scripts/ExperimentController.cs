@@ -111,6 +111,7 @@ public class ExperimentController : MonoBehaviour
         if(participantID != "")
         {
             inputField.interactable = false;
+            this.GetComponent<ExperimentOutput>().enabled = true;
         }
     }
 

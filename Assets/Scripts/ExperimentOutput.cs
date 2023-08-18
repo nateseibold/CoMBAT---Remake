@@ -13,11 +13,12 @@ public class ExperimentOutput : MonoBehaviour
     public string m_Path2;
     public string application_Path;
 
+
     // Start is called before the first frame update
     void Start()
     {
         application_Path = Application.dataPath;
-        application_Path = application_Path + "/"+"headData.txt";
+        application_Path = application_Path + "/" + GetComponent<ExperimentController>().participantID + "Output.txt";
         m_Path = application_Path;
 
         string header = "Time Since Start (in seconds),Participant ID,Trial Number,Condition Number,Head Position x,Head Position y,Head Position z";
@@ -31,6 +32,7 @@ public class ExperimentOutput : MonoBehaviour
     {
         if(GetComponent<ExperimentController>().recording)
         {
+
             //Data
             System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
             double cur_time = (double)(System.DateTime.UtcNow - epochStart).TotalMilliseconds;
@@ -45,9 +47,9 @@ public class ExperimentOutput : MonoBehaviour
 
             dataTracked = Time.time + "," + id + "," + trial + "," + condition + "," + x + "," + y + "," + z;
 
-            StreamWriter writer8 = new StreamWriter(m_Path, true);
-            writer8.WriteLine(dataTracked);
-            writer8.Close();
+            StreamWriter writer7 = new StreamWriter(m_Path, true);
+            writer7.WriteLine(dataTracked);
+            writer7.Close();
         }
     }
 }
