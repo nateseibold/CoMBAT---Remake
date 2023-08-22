@@ -49,6 +49,7 @@ public class ExperimentController : MonoBehaviour
     private bool seekingInput = false;
     private int trialLength = 20;
     private bool distort = false;
+    private Quaternion rotates;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +66,8 @@ public class ExperimentController : MonoBehaviour
         inBetweenCanvas.SetActive(true);
         darknessTrialCanvas2.SetActive(false);
         inBetweenCanvas2.SetActive(true);
+
+        rotates = room.transform.rotation;
     }
 
     // Update is called once per frame
@@ -88,9 +91,17 @@ public class ExperimentController : MonoBehaviour
             }
         }
 
+        if (distort)
+        {
+            room.transform.position = roomCamera.transform.position;
+        }
+    }
+
+    void LateUpdate()
+    {
         if(distort)
         {
-            
+           
         }
     }
 
