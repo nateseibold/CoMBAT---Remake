@@ -31,6 +31,8 @@ public class ExperimentController : MonoBehaviour
     public TMP_Text inBetweenText2;
     public TMP_Text roomText;
     public TMP_Text roomText2;
+    public TMP_Text darkText;
+    public TMP_Text darkText2;
     public Button startButton;
 
     //Can be used to stop the output file from recording
@@ -256,8 +258,28 @@ public class ExperimentController : MonoBehaviour
             condition = 5;
         }
 
-        yield return new WaitForSeconds(10);
+        darkText.text = "Feel Free to Look Around";
+        darkText2.text = "Feel Free to Look Around";
 
+        yield return new WaitForSeconds(7);
+
+        darkText.text = "Please Look Forward. Trial starts in: 3";
+        darkText2.text = "Please Look Forward. Trial starts in: 3";
+
+        yield return new WaitForSeconds(1);
+
+        darkText.text = "Please Look Forward. Trial starts in: 2";
+        darkText2.text = "Please Look Forward. Trial starts in: 2";
+
+        yield return new WaitForSeconds(1);
+
+        darkText.text = "Please Look Forward. Trial starts in: 1";
+        darkText2.text = "Please Look Forward. Trial starts in: 1";
+
+        yield return new WaitForSeconds(1);
+
+        darkText.text = "";
+        darkText2.text = "";
         recording = true;
 
         yield return new WaitForSeconds(trialLength);
