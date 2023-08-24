@@ -95,7 +95,7 @@ public class ExperimentController : MonoBehaviour
 
         if (distort)
         {
-            room.transform.position = roomCamera.transform.position;
+            //room.transform.position = roomCamera.transform.position;
         }
     }
 
@@ -350,14 +350,14 @@ public class ExperimentController : MonoBehaviour
     //Makes the room move with the camera
     private void distortWorld()
     {
-        //room.transform.SetParent(roomCamera.transform);
+        room.transform.SetParent(roomCamera.transform);
         distort = true;
     }
 
     //Returns to a static camera
     private void returnWorld()
     {
-        //room.transform.SetParent(null);
+        room.transform.SetParent(null);
         distort = false;
     }
 }
