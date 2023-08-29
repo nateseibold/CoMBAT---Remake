@@ -175,14 +175,19 @@ public class ExperimentController : MonoBehaviour
 
         trialText.text = "Trial Number: " + currentTrial;
 
-        if(!foam)
+        if(currentTrial % 8 == 1)
         {
             conditionText.text = "Condition Number: 1";
             condition = 1;
         }
-        else
+        else if(currentTrial % 8 == 4)
         {
             conditionText.text = "Condition Number: 4";
+            condition = 4;
+        }
+        else
+        {
+            conditionText.text = "Condition Number: 5";
             condition = 4;
         }
 
@@ -233,15 +238,20 @@ public class ExperimentController : MonoBehaviour
 
         trialText.text = "Trial Number: " + currentTrial;
 
-        if(!foam)
+        if(currentTrial % 8 == 2)
         {
             conditionText.text = "Condition Number: 2";
             condition = 2;
         }
+        else if(currentTrial % 8 == 6)
+        {
+            conditionText.text = "Condition Number: 6";
+            condition = 6;
+        }
         else
         {
-            conditionText.text = "Condition Number: 5";
-            condition = 5;
+            conditionText.text = "Condition Number: 8";
+            condition = 8;
         }
 
         darkText.text = "Feel Free to Look Around";
@@ -298,9 +308,9 @@ public class ExperimentController : MonoBehaviour
         }
         else
         {
-            conditionText.text = "Condition Number: 6";
+            conditionText.text = "Condition Number: 7";
             foam = false;
-            condition = 6;
+            condition = 7;
         }
 
         roomText.text = "Feel Free to Look Around";
