@@ -41,6 +41,7 @@ public class ExperimentController : MonoBehaviour
 
     //Room Variable
     public GameObject room;
+    public GameObject fixation;
 
     //Experiment Variables
     public string participantID;
@@ -50,8 +51,6 @@ public class ExperimentController : MonoBehaviour
     private bool foam = false;
     private bool seekingInput = false;
     private int trialLength = 20;
-    private bool distort = false;
-    private Quaternion rotates;
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +68,7 @@ public class ExperimentController : MonoBehaviour
         darknessTrialCanvas2.SetActive(false);
         inBetweenCanvas2.SetActive(true);
 
-        rotates = room.transform.rotation;
+        fixation.SetActive(false);
     }
 
     // Update is called once per frame
@@ -79,11 +78,11 @@ public class ExperimentController : MonoBehaviour
         {
             seekingInput = false;
 
-            if(currentTrial % 6 == 1 || currentTrial % 6 == 4)
+            if(currentTrial % 8 == 1 || currentTrial % 8 == 4 || currentTrial % 8 == 5)
             {
                 StartCoroutine(startNormalTrial());
             }
-            else if(currentTrial % 6 == 2 || currentTrial % 6 == 5)
+            else if(currentTrial % 8 == 2 || currentTrial % 8 == 6 || currentTrial % 8 == 0)
             {
                 StartCoroutine(startDarkTrial());
             }
@@ -91,19 +90,6 @@ public class ExperimentController : MonoBehaviour
             {
                 StartCoroutine(startDistortTrial());
             }
-        }
-
-        if (distort)
-        {
-            //room.transform.position = roomCamera.transform.position;
-        }
-    }
-
-    void LateUpdate()
-    {
-        if(distort)
-        {
-           
         }
     }
 
@@ -300,7 +286,7 @@ public class ExperimentController : MonoBehaviour
         inBetweenCanvas.SetActive(false);
         inBetweenCanvas2.SetActive(false);
 
-        distortWorld();
+        fixation.SetActive(true);
 
         trialText.text = "Trial Number: " + currentTrial;
 
@@ -322,24 +308,25 @@ public class ExperimentController : MonoBehaviour
 
         yield return new WaitForSeconds(7);
 
-        roomText.text = "Please Look Forward. Trial starts in: 3";
-        roomText2.text = "Please Look Forward. Trial starts in: 3";
+        roomText.text = "Please Look at Point. Trial starts in: 3";
+        roomText2.text = "Please Look at Point. Trial starts in: 3";
 
         yield return new WaitForSeconds(1);
 
-        roomText.text = "Please Look Forward. Trial starts in: 2";
-        roomText2.text = "Please Look Forward. Trial starts in: 2";
+        roomText.text = "Please Look at Point. Trial starts in: 2";
+        roomText2.text = "Please Look at Point. Trial starts in: 2";
 
         yield return new WaitForSeconds(1);
 
-        roomText.text = "Please Look Forward. Trial starts in: 1";
-        roomText2.text = "Please Look Forward. Trial starts in: 1";
+        roomText.text = "Please Look at Point. Trial starts in: 1";
+        roomText2.text = "Please Look at Point. Trial starts in: 1";
 
         yield return new WaitForSeconds(1);
 
         roomText.text = "";
         roomText2.text = "";
         recording = true;
+        distortWorld();
 
         yield return new WaitForSeconds(trialLength);
         recording = false;
@@ -350,14 +337,13 @@ public class ExperimentController : MonoBehaviour
     //Makes the room move with the camera
     private void distortWorld()
     {
+        fixation.SetActive(false);
         room.transform.SetParent(roomCamera.transform);
-        distort = true;
     }
 
     //Returns to a static camera
     private void returnWorld()
     {
         room.transform.SetParent(null);
-        distort = false;
     }
 }
