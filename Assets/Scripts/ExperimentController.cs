@@ -188,7 +188,7 @@ public class ExperimentController : MonoBehaviour
         else
         {
             conditionText.text = "Condition Number: 5";
-            condition = 4;
+            condition = 5;
         }
 
         roomText.text = "Feel Free to Look Around";
