@@ -1800,3 +1800,4 @@ Time Since Start (in seconds),Participant ID,Trial Number,Condition Number,Head 
 32.64997,test,1,1,0.2932273,1.781125,-2.062862
 32.66117,test,1,1,0.2931977,1.781115,-2.062894
 32.6722,test,1,1,0.293151,1.781087,-2.062912
+Time Since Start (in seconds),Participant ID,Trial Number,Condition Number,Head Position x,Head Position y,Head Position z

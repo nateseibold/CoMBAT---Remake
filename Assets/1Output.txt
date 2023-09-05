@@ -14395,3 +14395,4 @@ Time Since Start (in seconds),Participant ID,Trial Number,Condition Number,Head 
 312.9715,1,8,8,0.3648034,1.851959,-0.2745906
 312.9826,1,8,8,0.3612842,1.851927,-0.2747172
 312.9937,1,8,8,0.3576638,1.851771,-0.2748584
+Time Since Start (in seconds),Participant ID,Trial Number,Condition Number,Head Position x,Head Position y,Head Position z

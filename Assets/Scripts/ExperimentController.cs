@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using Valve.VR;
 
 public class ExperimentController : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class ExperimentController : MonoBehaviour
     public GameObject inBetweenCanvas2;
     public GameObject trialLengthInput;
     public GameObject partIDInput;
+    public GameObject startInput;
     public TMP_Text trialText;
     public TMP_Text conditionText;
     public TMP_Text inBetweenText;
@@ -52,6 +54,10 @@ public class ExperimentController : MonoBehaviour
     private bool seekingInput = false;
     private int trialLength = 20;
 
+    //VR Action Variables
+    public SteamVR_Action_Boolean clickAction;
+    public SteamVR_Input_Sources targetSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +80,7 @@ public class ExperimentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(seekingInput && Input.GetKeyDown("space"))
+        if(seekingInput && (Input.GetKeyDown("space") || clickAction.GetStateDown(targetSource)))
         {
             seekingInput = false;
 
@@ -96,9 +102,15 @@ public class ExperimentController : MonoBehaviour
     //Called once the start button is pressed
     public void startExperiment()
     {
-        currentTrial = 1;
+        if(currentTrial == 0)
+        {
+            currentTrial = 1;
+        }
+        
         startButton.interactable = false;
-        StartCoroutine(startNormalTrial());
+        TMP_InputField inputField = startInput.GetComponent<TMP_InputField>();
+        inputField.interactable = false;
+        seekingInput = true;
     }
 
     //Called on End Edit event of the ID input field
@@ -126,6 +138,26 @@ public class ExperimentController : MonoBehaviour
         if(success)
         {
             numTrials = num;
+            inputField.interactable = false;
+        }
+        else
+        {
+            inputField.text = "Enter an Integer";
+        }
+    }
+
+    //Called on End Edit event of the trial start input field
+    public void setTrialStart(string trials)
+    {
+        int num;
+
+        TMP_InputField inputField = startInput.GetComponent<TMP_InputField>();
+        string trialNums = inputField.text;
+        bool success = Int32.TryParse(trialNums, out num);
+
+        if (success)
+        {
+            currentTrial = num;
             inputField.interactable = false;
         }
         else
@@ -173,6 +205,8 @@ public class ExperimentController : MonoBehaviour
         inBetweenCanvas.SetActive(false);
         inBetweenCanvas2.SetActive(false);
 
+        fixation.SetActive(true);
+
         trialText.text = "Trial Number: " + currentTrial;
 
         if(currentTrial % 8 == 1)
@@ -196,23 +230,24 @@ public class ExperimentController : MonoBehaviour
 
         yield return new WaitForSeconds(7);
 
-        roomText.text = "Please Look Forward. Trial starts in: 3";
-        roomText2.text = "Please Look Forward. Trial starts in: 3";
+        roomText.text = "Please Look at Point. Trial starts in: 3";
+        roomText2.text = "Please Look at Point. Trial starts in: 3";
 
         yield return new WaitForSeconds(1);
 
-        roomText.text = "Please Look Forward. Trial starts in: 2";
-        roomText2.text = "Please Look Forward. Trial starts in: 2";
+        roomText.text = "Please Look at Point. Trial starts in: 2";
+        roomText2.text = "Please Look at Point. Trial starts in: 2";
 
         yield return new WaitForSeconds(1);
 
-        roomText.text = "Please Look Forward. Trial starts in: 1";
-        roomText2.text = "Please Look Forward. Trial starts in: 1";
+        roomText.text = "Please Look at Point. Trial starts in: 1";
+        roomText2.text = "Please Look at Point. Trial starts in: 1";
 
         yield return new WaitForSeconds(1);
 
         roomText.text = "";
         roomText2.text = "";
+        fixation.SetActive(false);
         recording = true;
 
         yield return new WaitForSeconds(trialLength);
