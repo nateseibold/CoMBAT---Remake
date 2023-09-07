@@ -52,6 +52,7 @@ public class ExperimentController : MonoBehaviour
     public int condition;
     private bool foam = false;
     private bool seekingInput = false;
+    private bool startTrial = false;
     private int trialLength = 20;
 
     //VR Action Variables
@@ -95,6 +96,24 @@ public class ExperimentController : MonoBehaviour
             else
             {
                 StartCoroutine(startDistortTrial());
+            }
+        }
+
+        if (startTrial && (Input.GetKeyDown("space") || clickAction.GetStateDown(targetSource)))
+        {
+            startTrial = false;
+
+            if (currentTrial % 8 == 1 || currentTrial % 8 == 4 || currentTrial % 8 == 5)
+            {
+                StartCoroutine(startNormalTrialCount());
+            }
+            else if (currentTrial % 8 == 2 || currentTrial % 8 == 6 || currentTrial % 8 == 0)
+            {
+                StartCoroutine(startDarkTrialCount());
+            }
+            else
+            {
+                StartCoroutine(startDistortTrialCount());
             }
         }
     }
@@ -228,8 +247,12 @@ public class ExperimentController : MonoBehaviour
         roomText.text = "Feel Free to Look Around";
         roomText2.text = "Feel Free to Look Around";
 
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(0.00000001f);
+        startTrial = true;
+    }
 
+    private IEnumerator startNormalTrialCount()
+    {
         roomText.text = "Please Look at Point. Trial starts in: 3";
         roomText2.text = "Please Look at Point. Trial starts in: 3";
 
@@ -292,8 +315,12 @@ public class ExperimentController : MonoBehaviour
         darkText.text = "Feel Free to Look Around";
         darkText2.text = "Feel Free to Look Around";
 
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(0.00000001f);
+        startTrial = true;
+    }
 
+    private IEnumerator startDarkTrialCount()
+    {
         darkText.text = "Please Look Forward. Trial starts in: 3";
         darkText2.text = "Please Look Forward. Trial starts in: 3";
 
@@ -351,8 +378,12 @@ public class ExperimentController : MonoBehaviour
         roomText.text = "Feel Free to Look Around";
         roomText2.text = "Feel Free to Look Around";
 
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(0.00000001f);
+        startTrial = true;
+    }
 
+    private IEnumerator startDistortTrialCount()
+    {
         roomText.text = "Please Look at Point. Trial starts in: 3";
         roomText2.text = "Please Look at Point. Trial starts in: 3";
 
