@@ -230,17 +230,17 @@ public class ExperimentController : MonoBehaviour
 
         if(currentTrial % 8 == 1)
         {
-            conditionText.text = "Condition Number: 1";
+            conditionText.text = "Normal vision on solid ground--No Sound (#1)";
             condition = 1;
         }
         else if(currentTrial % 8 == 4)
         {
-            conditionText.text = "Condition Number: 4";
+            conditionText.text = "Normal vision on solid ground--WITH SOUND (#4)";
             condition = 4;
         }
         else
         {
-            conditionText.text = "Condition Number: 5";
+            conditionText.text = "Normal vision on foam--No Sound (#5)";
             condition = 5;
         }
 
@@ -298,17 +298,17 @@ public class ExperimentController : MonoBehaviour
 
         if(currentTrial % 8 == 2)
         {
-            conditionText.text = "Condition Number: 2";
+            conditionText.text = "Black screen on solid ground--No Sound (#2)";
             condition = 2;
         }
         else if(currentTrial % 8 == 6)
         {
-            conditionText.text = "Condition Number: 6";
+            conditionText.text = "Black screen on foam--No Sound (#6)";
             condition = 6;
         }
         else
         {
-            conditionText.text = "Condition Number: 8";
+            conditionText.text = "Black screen on foam--WITH SOUND (#8)";
             condition = 8;
         }
 
@@ -362,15 +362,15 @@ public class ExperimentController : MonoBehaviour
 
         trialText.text = "Trial Number: " + currentTrial;
 
-        if(!foam)
+        if(currentTrial % 8 == 3)
         {
-            conditionText.text = "Condition Number: 3";
+            conditionText.text = "Head-fixed vision on solid ground--No Sound (#3)";
             foam = true;
             condition = 3;
         }
         else
         {
-            conditionText.text = "Condition Number: 7";
+            conditionText.text = "Head-fixed vision on foam--No Sound (#7)";
             foam = false;
             condition = 7;
         }

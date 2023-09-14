@@ -6485,3 +6485,4 @@ Time Since Start (in seconds),Participant ID,Trial Number,Condition Number,Head 
 97.78342,test,3,3,0.03728222,0.6098351,-1.212389
 97.79463,test,3,3,0.03722857,0.6098217,-1.212455
 97.81318,test,3,3,0.03724264,0.6098239,-1.212464
+Time Since Start (in seconds),Participant ID,Trial Number,Condition Number,Head Position x,Head Position y,Head Position z
