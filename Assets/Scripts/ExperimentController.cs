@@ -25,6 +25,7 @@ public class ExperimentController : MonoBehaviour
     public GameObject darknessTrialCanvas2;
     public GameObject inBetweenCanvas2;
     public GameObject trialLengthInput;
+    public GameObject trialTimeInput;
     public GameObject partIDInput;
     public GameObject startInput;
     public TMP_Text trialText;
@@ -53,7 +54,7 @@ public class ExperimentController : MonoBehaviour
     private bool foam = false;
     private bool seekingInput = false;
     private bool startTrial = false;
-    private int trialLength = 20;
+    public int trialLength = 20;
 
     //VR Action Variables
     public SteamVR_Action_Boolean clickAction;
@@ -157,6 +158,25 @@ public class ExperimentController : MonoBehaviour
         if(success)
         {
             numTrials = num;
+            inputField.interactable = false;
+        }
+        else
+        {
+            inputField.text = "Enter an Integer";
+        }
+    }
+
+    public void setTrialLength(string trials)
+    {
+        int num;
+
+        TMP_InputField inputField = trialTimeInput.GetComponent<TMP_InputField>();
+        string trialNums = inputField.text;
+        bool success = Int32.TryParse(trialNums, out num);
+
+        if (success)
+        {
+            trialLength = num;
             inputField.interactable = false;
         }
         else

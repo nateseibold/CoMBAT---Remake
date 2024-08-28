@@ -21,7 +21,7 @@ public class ExperimentOutput : MonoBehaviour
         application_Path = application_Path + "/" + GetComponent<ExperimentController>().participantID + "Output.txt";
         m_Path = application_Path;
 
-        string header = "Time Since Start (in seconds),Participant ID,Trial Number,Condition Number,Head Position x,Head Position y,Head Position z";
+        string header = "Time Since Start (in seconds),Participant ID,Trial Number,Trial Length,Condition Number,Head Position x,Head Position y,Head Position z";
         StreamWriter writer8 = new StreamWriter(m_Path, true);
         writer8.WriteLine(header);
         writer8.Close();
@@ -40,12 +40,13 @@ public class ExperimentOutput : MonoBehaviour
             
             string id = GetComponent<ExperimentController>().participantID;
             int trial = GetComponent<ExperimentController>().currentTrial;
+            int length = GetComponent<ExperimentController>().trialLength;
             int condition = GetComponent<ExperimentController>().condition;
             float x = playerHead.transform.position.x;
             float y = playerHead.transform.position.y;
             float z = playerHead.transform.position.z;
 
-            dataTracked = Time.time + "," + id + "," + trial + "," + condition + "," + x + "," + y + "," + z;
+            dataTracked = Time.time + "," + id + "," + trial + "," + length + "," + condition + "," + x + "," + y + "," + z;
 
             StreamWriter writer7 = new StreamWriter(m_Path, true);
             writer7.WriteLine(dataTracked);
